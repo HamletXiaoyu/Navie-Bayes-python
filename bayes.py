@@ -13,6 +13,7 @@ def load_csv(filename):
     return dataset
 
 #split dataset
+# for eaxmple 67% for train, 33% for test
 def split_dataset(dataset, split_ratio):
     train_size = int(len(dataset) * split_ratio)
     train_set = []
@@ -34,11 +35,12 @@ def separate_by_class(dataset):
 
 #calculate avg
 def mean(numbers):
-    return sum(numbers)/float(len(numbers))
+    return sum(numbers) / float(len(numbers))
 
+#cal stdev
 def stdev(numbers):
     avg = mean(numbers)
-    variance = sum([pow(x-avg, 2) for x in numbers]) / float(len(numbers)-1)
+    variance = sum([pow(x - avg, 2) for x in numbers]) / float(len(numbers) - 1)
     return math.sqrt(variance)
 
 def summarize(dataset):
@@ -99,7 +101,6 @@ def main():
     train_set, test_set = split_dataset(dataset, split_ratio)
     print('Split {0} rows into train={1} and test={2} rows').format(len(dataset), len(train_set), len(test_set))    
     summaries = summarize_by_class(train_set)
-
     predictions = get_predictions(summaries, test_set)
     accuracy = get_accuracy(test_set, predictions)
     print('accuracy: {0}%').format(accuracy)
